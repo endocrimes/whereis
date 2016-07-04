@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>Where is Danielle?</title>
+    <style>
+html, body, iframe { height: 100%; margin: 0; padding: 0;}
+.wrapper {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  color: #333333;
+  text-align: center;
+  font-size: 30pt;
+}
+.wrapper div {
+  padding: .8em;
+  margin-top: 20%;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.location, .tz {
+  color: #932192;
+}
+    </style>
+  </head>
+  <body>
+    <div class='wrapper'><div>Danielle is probably in: <span class='location'><%= model.pretty_name %></span>,<br /> and their current UTC Offset is: <span class='tz'><%= model.time_zone_offset / 60.0 %></span></div></div>
+    <iframe
+      frameborder="0" style="border:0;width:100%;height:100%"
+                      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCnSnRQ7JCzuX7ZtK-3Qe3w9peBv6MuN-I
+                      &q=<%= model.pretty_name.gsub(' ','+') %>"
+                      allowfullscreen>
+    </iframe>
+  </body>
+</html>
