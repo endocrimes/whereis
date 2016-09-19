@@ -1,0 +1,19 @@
+{
+  "name": "where is",
+  "description": "This tool shows a users last swarm checkin city on a map",
+  "env": {
+    "GOOGLE_MAPS_TOKEN": {
+      "description": "A google maps api token"
+    },
+    "USER_NAME": {
+      "description": "The name you wish to display to users."
+    },
+    "USER_PRONOUN": {
+      "description": "The pronoun you wish to display to users.",
+      "value": "their"
+    },
+    "FOURSQUARE_ACCESS_TOKEN": {
+      "description": "A valid foursquare access token"
+    }
+  }
+}
