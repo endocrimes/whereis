@@ -17,7 +17,7 @@ class LocationController
   private
 
   def contains_valid_checkin?(checkins)
-    !(checkins.nil? && checkins.compact.uniq.count == 0)
+    !(checkins.nil? && checkins.compact.uniq.count.zero?)
   end
 end
 
