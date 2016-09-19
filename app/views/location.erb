@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Where is Danielle?</title>
+    <title>Where is <%= person.name %>?</title>
     <style>
 html, body, iframe { height: 100%; margin: 0; padding: 0;}
 .wrapper {
@@ -25,11 +25,11 @@ html, body, iframe { height: 100%; margin: 0; padding: 0;}
     </style>
   </head>
   <body>
-    <div class='wrapper'><div>Danielle is probably in: <span class='location'><%= model.pretty_name %></span>,<br /> and their current UTC Offset is: <span class='tz'><%= model.time_zone_offset / 60.0 %></span></div></div>
+    <div class='wrapper'><div><%= person.name %> is probably in: <span class='location'><%= location.pretty_name %></span>,<br /> and <%= person.pronoun %> current UTC Offset is: <span class='tz'><%= location.time_zone_offset / 60.0 %></span></div></div>
     <iframe
       frameborder="0" style="border:0;width:100%;height:100%"
-                      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCnSnRQ7JCzuX7ZtK-3Qe3w9peBv6MuN-I
-                      &q=<%= model.pretty_name.gsub(' ','+') %>"
+                      src="https://www.google.com/maps/embed/v1/place?key=<%= tokens[:GOOGLE_MAPS]  %>
+                      &q=<%= location.pretty_name.gsub(' ','+') %>"
                       allowfullscreen>
     </iframe>
   </body>
