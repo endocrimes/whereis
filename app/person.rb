@@ -1,4 +1,4 @@
-def Person
+class Person
   attr_accessor :name, :pronoun
 
   def initalize(name, pronoun)
