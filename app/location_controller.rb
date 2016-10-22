@@ -23,19 +23,25 @@ end
 
 class Location
   attr_accessor :pretty_name
-  
+
   attr_accessor :time_zone_offset
+  attr_accessor :time_zone_offset_hours
+  attr_accessor :time_zone_offset_minutes
 
   def initialize(checkin)
     location = checkin.venue.location
     @pretty_name = "#{location.city}, #{location.state}, #{location.country}"
     @time_zone_offset = checkin.timeZoneOffset
+    @time_zone_offset_hours = (checkin.timeZoneOffset / 60).floor
+    @time_zone_offset_minutes = checkin.timeZoneOffset % 60
   end
 
   def to_json
     {
       pretty_name: pretty_name,
-      time_zone_offset: time_zone_offset
+      time_zone_offset: time_zone_offset,
+      time_zone_offset_hours: time_zone_offset_hours,
+      time_zone_offset_minutes: time_zone_offset_minutes,
     }.to_json
   end
 end
