@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'foursquare2'
+require 'mapbox-sdk'
 require 'json'
 
 require_relative 'location_controller'
@@ -8,7 +9,7 @@ require_relative 'person'
 class Whereis < Sinatra::Base
   attr_accessor :location_controller
   attr_accessor :person
-  attr_accessor :google_maps_token
+  attr_accessor :mapbox_token
 
   def initialize()
     foursquare_access_token = ENV['FOURSQUARE_ACCESS_TOKEN']
@@ -19,14 +20,15 @@ class Whereis < Sinatra::Base
     pronoun = ENV['USER_PRONOUN']
     @person = Person.new(name, pronoun)
 
-    @google_maps_token = ENV['GOOGLE_MAPS_TOKEN']
+    @mapbox_token = ENV['MAPBOX_TOKEN']
+    Mapbox.access_token = @mapbox_token
     super
   end
 
   get '/' do
     erb(:location, :locals => {:location => location,
                                :person => person,
-                               :tokens => { :GOOGLE_MAPS => google_maps_token }})
+                               :tokens => { :MAPBOX => mapbox_token }})
   end
 
   get '/json' do

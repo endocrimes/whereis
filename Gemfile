@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'sinatra'
 gem 'rake', '11.2.0'
 gem 'foursquare2'
+gem 'mapbox-sdk'
 
 group :development do
   gem 'rubocop'

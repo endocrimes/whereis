@@ -5,35 +5,46 @@
     <%= person.name %>?</title>
   <style>
     html,
-    body,
-    iframe {
+    body {
       height: 100%;
       margin: 0;
       padding: 0;
     }
 
-    .wrapper {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      top: 0;
-      color: #333333;
-      text-align: center;
-      font-size: 30pt;
-      pointer-events: none;
+    body {
+      display: flex;
+      flex-direction: column;
     }
 
-    .wrapper div {
-      padding: .8em;
-      margin-top: 20%;
-      background-color: rgba(255, 255, 255, 0.7);
+    header {
+      background-color: #5A5475;
+      color: #FFB8D1;
+      font-size: 14pt;
+      font-family: 'Fira Code';
+      pointer-events: none;
+
+      padding: .4em;
       pointer-events: auto;
+    }
+
+    header p {
+      margin: 3pt;
+      line-height: 1.4em;
+    }
+
+    header .indented {
+      margin-left: 2em;
+    }
+
+    #map {
+      flex: 1
     }
 
     .location,
     .tz,
-    #local-time {
-      color: #932192;
+    #local-time,
+    a {
+      color: #FFF252;
     }
   </style>
 
@@ -50,18 +61,25 @@
 </head>
 
 <body>
-  <div class='wrapper'>
-    <div>
-      <%= person.name %> is probably in: <span class='location'><%= location.pretty_name %></span>,
-        <br /> and
-        <%= person.pronoun %> current UTC Offset is: <span class='tz'><%= location.time_zone_offset_hours %>:<%= location.time_zone_offset_minutes.to_s.rjust(2, '0') %></span>
-        <br />
-        where the local time is <span id="local-time" />
-    </div>
-  </div>
-  <iframe frameborder="0" style="border:0;width:100%;height:100%" src="https://www.google.com/maps/embed/v1/place?key=<%= tokens[:GOOGLE_MAPS]  %>
-                      &q=<%= location.pretty_name.gsub(' ','+') %>" allowfullscreen>
-  </iframe>
+  <header>
+    <p>$ locate <a href="https://twitter.com/dantoml">@dantoml</a></p>
+    <p class="indented"><%= person.name %> is probably in: <span class='location'><%= location.pretty_name %></span>.
+    <br /><%= person.pronoun %> current UTC Offset is: <span class='tz'><%= location.time_zone_offset_hours %>:<%= location.time_zone_offset_minutes.to_s.rjust(2, '0') %></span>,
+    and the local time is <span id="local-time"></span>.
+    </p>
+  </header>
+  <div id='map'></div>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
+  <script>
+    mapboxgl.accessToken = '<%= tokens[:MAPBOX] %>';
+var map = new mapboxgl.Map({
+  container: 'map',
+  center: [<%= location.lat %>,<%= location.lon %>],
+  zoom: 8,
+  style: 'mapbox://styles/dantoml/cjgtkbr1o000u2sprasstyxv7'
+});
+  </script>
 </body>
 
 </html>
