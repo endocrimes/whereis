@@ -5,3 +5,10 @@ authors = ["Danielle Tomlinson <dani@tomlinson.io>"]
 edition = "2018"
 
 [dependencies]
+rocket = "0.4.0"
+serde = "*"
+
+[dependencies.rocket_contrib]
+version = "*"
+default-features = false
+features = ["tera_templates"]
