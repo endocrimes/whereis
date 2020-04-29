@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'sinatra'
-gem 'rake', '11.2.0'
+gem 'rake', '12.3.3'
 gem 'foursquare2'
 
 group :development do
