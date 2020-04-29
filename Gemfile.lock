@@ -9,7 +9,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.10.0)
       faraday (>= 0.7.4, < 0.10)
-    ffi (1.9.10)
+    ffi (1.12.2)
     formatador (0.2.5)
     foursquare2 (2.0.2)
       faraday (~> 0.8)
